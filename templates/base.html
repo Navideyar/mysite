@@ -59,24 +59,24 @@
       <div class="container main-menu">
         <div class="row align-items-center justify-content-between d-flex">
           <div id="logo">
-            <a href="index.html"><img src="{% static 'img/logo.png' %}" alt="" title="" /></a>
+            <a href="{% url 'website:home' %}"><img src="{% static 'img/logo.png' %}" alt="" title="" /></a>
           </div>
           <nav id="nav-menu-container">
             <ul class="nav-menu">
               <li>
-                <a href="index.html">Home</a>
+                <a href="{% url 'website:home' %}">Home</a>
               </li>
               <li>
-                <a href="about.html">About</a>
+                <a href="{% url 'website:about' %}">About</a>
               </li>
               <li class="menu-has-children">
                 <a href="">Blog</a>
                 <ul>
                   <li>
-                    <a href="blog-home.html">Blog Home</a>
+                    <a href="{% url 'blog:index'%}">Blog Home</a>
                   </li>
                   <li>
-                    <a href="blog-single.html">Blog Single</a>
+                    <a href="{% url 'blog:single'%}">Blog Single</a>
                   </li>
                 </ul>
               </li>
@@ -100,7 +100,7 @@
                 </ul>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <a href="{% url 'website:contact' %}">Contact</a>
               </li>
             </ul>
           </nav>
