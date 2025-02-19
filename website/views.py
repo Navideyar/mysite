@@ -8,3 +8,6 @@ def about(request):
 
 def contact(request):
     return render(request,"contact.html")
+
+def test_view(request):
+    return render(request, 'test.html', {'name':'navid', 'lastname':'safaie' })
