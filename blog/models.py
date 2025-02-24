@@ -10,9 +10,9 @@ class Post(models.Model):
     # image
     # author
     # tag
-    #tag = models.CharField(max_length=255)
+    # tag = models.CharField(max_length=255)
     # category
-    #category = models.CharField(max_length=255)
+    # ategory = models.CharField(max_length=255)
     # counted_view
     counted_views = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
@@ -20,5 +20,8 @@ class Post(models.Model):
     created_date = models.DateField(auto_now_add=True)
     updated_date = models.DateField(auto_now=True)
     
+    class Meta:
+        ordering = ["-created_date"]
+        
     def __str__(self):
         return f"{self.id} - {self.title}"
