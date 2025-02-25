@@ -6,6 +6,11 @@
     <title>صفحه تست</title>
 </head>
 <body>
-    <h1>hello {{name}} {{lastname}}</h1>
+    {{posts}}
+    {% for post in posts %}
+    <h1>{{post.title}}</h1>
+    <p>{{post.content}}</p>
+    <small>{{post.published_date}}</small>
+    {% endfor %}
 </body>
 </html>
