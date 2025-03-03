@@ -1,4 +1,6 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <!-- start banner Area -->
 <section class="banner-area relative blog-home-banner" id="home">
   <div class="overlay overlay-bg"></div>
@@ -97,7 +99,9 @@
           <div class="col-lg-3 col-md-3 meta-details">
             <ul class="tags">
               <li>
-                {{ post.category.all|join:", " }}
+                {% for cat in post.category.all %}
+                <a href="#">{{ cat.name }}</a>{% if not forloop.last %}, {% endif %}
+                {% endfor %}
               </li>
             </ul>
 
@@ -111,7 +115,7 @@
                 <span class="lnr lnr-calendar-full"></span>
               </p>
               <p class="view col-lg-12 col-md-12 col-6">
-                <a href="#">{{post.counted_views}}</a>
+                <a href="#">{{post.counted_views}} Views</a>
                 <span class="lnr lnr-eye"></span>
               </p>
               <p class="comments col-lg-12 col-md-12 col-6">
@@ -124,9 +128,8 @@
               <img class="img-fluid" src="{{post.image.url}}" alt="" />
             </div>
             <a class="posts-title" href="{% url 'blog:single' post.id %}"
-              ><h3>{{post.title}}</h3></a
-            >
-            <p class="excert">{{post.content}}</p>
+              ><h3>{{post.title}}</h3></a>
+            <p class="excert">{{ post.content|truncatechars:150 }}</p>
             <a href="blog-single.html" class="primary-btn">View More</a>
           </div>
         </div>
@@ -171,31 +174,8 @@
               <button type="submit"><i class="fa fa-search"></i></button>
             </form>
           </div>
-          <div class="single-sidebar-widget user-info-widget">
-            <img src="{% static 'img/blog/user-info.png' %}" alt="" />
-            <a href="#"><h4>Charlie Barber</h4></a>
-            <p>Senior blog writer</p>
-            <ul class="social-links">
-              <li>
-                <a href="#"><i class="fa fa-facebook"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fa fa-twitter"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fa fa-github"></i></a>
-              </li>
-              <li>
-                <a href="#"><i class="fa fa-behance"></i></a>
-              </li>
-            </ul>
-            <p>
-              Boot camps have its supporters andit sdetractors. Some people do
-              not understand why you should have to spend money on boot camp
-              when you can get. Boot camps have itssuppor ters andits
-              detractors.
-            </p>
-          </div>
+          {% include "blog/blog-writer.html" %}
+          
           <div class="single-sidebar-widget popular-post-widget">
             <h4 class="popular-title">Popular Posts</h4>
             <div class="popular-post-list">
@@ -251,14 +231,7 @@
               </div>
             </div>
           </div>
-          <div class="single-sidebar-widget ads-widget">
-            <a href="#"
-              ><img
-                class="img-fluid"
-                src="{% static 'img/blog/ads-banner.jpg' %}"
-                alt=""
-            /></a>
-          </div>
+          {% include "blog/blog-ads.html" %}
           <div class="single-sidebar-widget post-category-widget">
             <h4 class="category-title">Post Catgories</h4>
             <ul class="cat-list">
