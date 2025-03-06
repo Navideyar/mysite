@@ -1,17 +1,19 @@
-{% load blog-tags %}
+{% load blog_tags %} {# This tag loads custom template tags from the blog_tags module #}
 
 <!DOCTYPE html>
 <html lang="fa">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
     <title>صفحه تست</title>
-</head>
-<body>
-   <h1>صفحه تست</h1>
-   <p>این یک صفحه تست است</p>
-    <p>تعداد پست ها: {{ posts|length }}</p>
-    <p>تعداد کاربران: {{ users|length }}</p>
-    <p>تست : {% totalposts %}</p>
-
+  </head>
+  <body>
+    <h1>صفحه تست</h1>
+    
+      {% latestposts %}
+      
+      
+  </body>
 </html>
