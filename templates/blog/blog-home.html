@@ -118,13 +118,13 @@
             <ul class="tags">
               <li>
                 {% for cat in post.category.all %}
-                <a href="#">{{ cat.name }}</a>{% if not forloop.last %}, {% endif %}
+                <a href="{% url "blog:category" cat.name %}">{{ cat.name }}</a>{% if not forloop.last %}, {% endif %}
                 {% endfor %}
               </li>
             </ul>
             <div class="user-details row">
               <p class="user-name col-lg-12 col-md-12 col-6">
-                <a href="#">{{post.author.get_full_name}}</a>
+                <a href="{% url "blog:author" post.author.username %}">{{post.author.get_full_name}}</a>
                 <span class="lnr lnr-user"></span>
               </p>
               <p class="date col-lg-12 col-md-12 col-6">

@@ -6,7 +6,7 @@
 
       {% for name, count in categories.items %}
       <li>
-        <a href="#" class="d-flex justify-content-between">
+        <a href="{% url "blog:category" name %}" class="d-flex justify-content-between">
           <p>{{ name }}</p>
           <p>{{ count }}</p>
         </a>
