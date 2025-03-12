@@ -8,4 +8,5 @@ urlpatterns = [
     path("about/", about, name="about"),
     path("category/<str:cat_name>/", blog_category, name="category"),
     path("contact/", contact, name="contact"),
+    path("test/", test_view, name="test"),
 ]

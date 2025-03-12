@@ -10,10 +10,10 @@
     <title>صفحه تست</title>
   </head>
   <body>
-    <h1>صفحه تست</h1>
-    
-      {% latestposts %}
-      
-      
+    <form method="post" action="{% url 'website:test' %}">
+      {% csrf_token %}
+      {{ form }}
+      <button type="submit">send</button>
+    </form>
   </body>
 </html>
