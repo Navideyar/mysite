@@ -95,7 +95,7 @@
 							<div class="single-footer-widget">
 								<h6>About Agency</h6>
 								<p>
-									The world has become so fast paced that people don’t want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point 
+									The world has become so fast paced that people don't want to stand by reading a page of information, they would much rather look at a presentation and understand the message. It has come to a point 
 								</p>
 							</div>
 						</div>
@@ -128,11 +128,12 @@
 								<p>
 									For business professionals caught between high OEM price and mediocre print and graphic output.									
 								</p>								
-								<div id="mc_embed_signup">
-									<form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="subscription relative">
+								<div>
+									<form action="{% url 'website:newsletter' %}" method="post">
+										{% csrf_token %}
 										<div class="input-group d-flex flex-row">
-											<input name="EMAIL" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
-											<button class="btn bb-btn"><span class="lnr lnr-location"></span></button>		
+											<input name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address '" required="" type="email">
+											<button class="btn bb-btn" type="submit" ><span class="lnr lnr-location"></span></button>		
 										</div>									
 										<div class="mt-10 info"></div>
 									</form>
@@ -184,6 +185,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>					
 			<script src="{% static 'js/owl.carousel.min.js' %}"></script>							
 			<script src="{% static 'js/mail-script.js' %}"></script>	
-			<script src="{% static 'js/main.js' %}"></script>	
+			<script src="{% static 'js/main.js' %}"></script>
+			<script src="{% static 'js/newsletter.js' %}"></script>
 		</body>
 	</html>

@@ -9,3 +9,11 @@ class ContactAdmin(admin.ModelAdmin):
     search_fields = ('name', 'email', 'subject', 'message')
     date_hierarchy = 'created_date'
 admin.site.register(Contact, ContactAdmin)
+
+from website.models import Newsletter
+
+class NewsletterAdmin(admin.ModelAdmin):
+    list_display = ('email',)
+    search_fields = ('email',)
+admin.site.register(Newsletter, NewsletterAdmin)
+
