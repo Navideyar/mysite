@@ -15,7 +15,7 @@
       </div>
       <div class="details">
         <a href="{% url "blog:single" pid=post.id %}"><h6>{{post.title}}</h6></a>
-        <p class="post-date">{{ post.published_date|persian_date }}</p>  
+        <p class="post-date">{{ post.published_date }}</p>    
       </div>
     </div>
     {% endfor %}

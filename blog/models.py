@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Category(models.Model):
@@ -19,7 +20,7 @@ class Post(models.Model):
     published_date = models.DateField(null=True)
     created_date = models.DateField(auto_now_add=True)
     updated_date = models.DateField(auto_now=True)
-    
+    tags = TaggableManager()
     class Meta:
         ordering = ["-created_date"]
         
