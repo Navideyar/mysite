@@ -19,11 +19,25 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.shortcuts import render
+from django.contrib.sitemaps.views import sitemap
+from website.sitesmaps import StaticViewSitemap
+from blog.sitemap import BlogPostSitemap, BlogCategorySitemap, BlogStaticSitemap
+import debug_toolbar
+
+sitemaps = {
+    'static': StaticViewSitemap,
+    'blog-posts': BlogPostSitemap,
+    'blog-categories': BlogCategorySitemap,
+    'blog-static': BlogStaticSitemap,
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
-    path('blog/', include('blog.urls'))
+    path('blog/', include('blog.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt', include('robots.urls')),
+    path('__debug__/', include(debug_toolbar.urls)),
 ]
 
 

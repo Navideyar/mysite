@@ -28,6 +28,11 @@ def blog_view(request, cat_name=None, author_username=None):
 def blog_single(request, pid):
     posts = Post.objects.filter(status=1)
     post = get_object_or_404(Post, pk=pid)
+    
+    # افزایش تعداد بازدید
+    post.counted_views += 1
+    post.save()
+    
     context = {"post": post}
     return render(request, "blog/blog-single.html", context)
 
