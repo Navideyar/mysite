@@ -27,4 +27,19 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.id} - {self.title}"
 
+class Comment(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    created_date = models.DateField(auto_now_add=True)
+    updated_date = models.DateField(auto_now=True)
+    approved = models.BooleanField(default=False)
+    
+    class Meta:
+        ordering = ["-created_date"]
+    
+    def __str__(self):
+        return f"{self.name} - {self.subject}"
 

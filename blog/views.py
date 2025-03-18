@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from blog.models import Post, Category
+from blog.models import Post, Category , Comment 
 from django.db.models import Q
-from django.core.paginator import Paginator
-
+from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
+from django.contrib import messages
+from .forms import CommentForm
 
 # Create your views here.
 def blog_view(request, cat_name=None, author_username=None, tag_name=None):
@@ -27,14 +28,29 @@ def blog_view(request, cat_name=None, author_username=None, tag_name=None):
 
 
 def blog_single(request, pid):
-    posts = Post.objects.filter(status=1)
     post = get_object_or_404(Post, pk=pid)
+    
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.post = post  # اینجا post را به comment اضافه می‌کنیم
+            comment.save()
+            messages.add_message(request, messages.SUCCESS, "نظر شما با موفقیت ثبت شد")
+        else:
+            messages.add_message(request, messages.ERROR, "نظر شما ثبت نشد")
+            
+    posts = Post.objects.filter(status=1)
     
     # افزایش تعداد بازدید
     post.counted_views += 1
     post.save()
     
-    context = {"post": post}
+    # دریافت کامنت‌های مربوط به این پست از دیتابیس
+    comments = Comment.objects.filter(post=post.id, approved=True)
+    form = CommentForm()
+    context = {"post": post, "comments": comments, "form": form}
+    
     return render(request, "blog/blog-single.html", context)
 
 

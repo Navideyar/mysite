@@ -116,25 +116,81 @@
           </div>
         </form>
       </div>
+    
       {% if messages %}
+      <div class="container messages-container pt-3">
         {% for message in messages %}
-          <div class="alert alert-{{ message.tags }}" style="
+          <div class="alert alert-{{ message.tags }} fade-in" style="
             font-size: 1.2rem;
             color: #fff;
-            background-color: #2ecc71;
+            background-color: {% if message.tags == 'success' %}#27ae60{% else %}#e74c3c{% endif %};
             font-family: 'Vazir', 'IRANSans', sans-serif;
-            padding: 15px 25px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            margin: 15px 0;
+            padding: 20px 25px;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            margin: 20px 0;
             text-align: center;
-            transition: all 0.3s ease;
-            border-right: 5px solid #27ae60;
-            animation: blink 1s infinite;">
+            border-right: 6px solid {% if message.tags == 'success' %}#219653{% else %}#c0392b{% endif %};
+            position: relative;
+            overflow: hidden;">
+            <i class="fa {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}" style="margin-left: 10px;"></i>
             {{ message }}
+            
+            <!-- نوار پیشرفت در پایین پیام -->
+            <div class="progress-bar" style="
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              height: 4px;
+              width: 100%;
+              background-color: rgba(255, 255, 255, 0.3);
+              ">
+              <div class="progress" style="
+                height: 100%;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.7);
+                animation: slideOut 5s linear forwards;
+              "></div>
+            </div>
           </div>
         {% endfor %}
-      {% endif %}
+      </div>
+
+      <style>
+        @keyframes slideOut {
+          from { width: 100%; }
+          to { width: 0%; }
+        }
+        
+        .fade-in {
+          opacity: 0;
+          animation: fadeIn 0.5s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      </style>
+
+      <script>
+        // حذف پیام‌ها بعد از 5 ثانیه
+        document.addEventListener('DOMContentLoaded', function() {
+          setTimeout(function() {
+            const messages = document.querySelectorAll('.alert');
+            messages.forEach(function(message) {
+              message.style.opacity = '0';
+              message.style.transform = 'translateY(-10px)';
+              message.style.transition = 'all 0.5s ease';
+              
+              setTimeout(function() {
+                message.remove();
+              }, 500);
+            });
+          }, 5000);
+        });
+      </script>
+    {% endif %}
 
       <style>
         @keyframes blink {

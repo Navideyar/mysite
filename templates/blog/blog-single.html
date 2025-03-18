@@ -56,7 +56,7 @@
                 <a href="#">{{post.counted_views}} Views</a> <span class="lnr lnr-eye"></span>
               </p>
               <p class="comments col-lg-12 col-md-12 col-6">
-                <a href="#">06 Comments</a> <span class="lnr lnr-bubble"></span>
+                <a href="#">{{ comments.count }} Comments</a> <span class="lnr lnr-bubble"></span>
               </p>
               <ul class="social-links col-lg-12 col-md-12 col-6">
                 <li>
@@ -79,52 +79,30 @@
             <p class="excert">{{post.content | safe}}</p>
           </div>
         </div>
-        <div class="navigation-area">
-          <div class="row">
-            <div
-              class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-              <div class="thumb">
-                <a href="#"
-                  ><img
-                    class="img-fluid"
-                    src="{% static 'img/blog/prev.jpg' %}"
-                    alt=""
-                /></a>
-              </div>
-              <div class="arrow">
-                <a href="#"
-                  ><span class="lnr text-white lnr-arrow-left"></span
-                ></a>
-              </div>
-              <div class="detials">
-                <p>Prev Post</p>
-                <a href="#"><h4>Space The Final Frontier</h4></a>
-              </div>
-            </div>
-            <div
-              class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-              <div class="detials">
-                <p>Next Post</p>
-                <a href="#"><h4>Telescopes 101</h4></a>
-              </div>
-              <div class="arrow">
-                <a href="#"
-                  ><span class="lnr text-white lnr-arrow-right"></span
-                ></a>
-              </div>
-              <div class="thumb">
-                <a href="#"
-                  ><img
-                    class="img-fluid"
-                    src="{% static 'img/blog/next.jpg' %}"
-                    alt=""
-                /></a>
-              </div>
-            </div>
-          </div>
-        </div>
+       <!--
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://http-127-0-0-1-8000-kayov13dvt.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        -->
         <div class="comments-area">
-          <h4>05 Comments</h4>
+          <h4>{{ comments.count }} Comments</h4>
+          {% for comment in comments %}
           <div class="comment-list">
             <div class="single-comment justify-content-between d-flex">
               <div class="user justify-content-between d-flex">
@@ -132,106 +110,50 @@
                   <img src="{% static 'img/blog/c1.jpg' %}" alt="" />
                 </div>
                 <div class="desc">
-                  <h5><a href="#">Emilly Blunt</a></h5>
-                  <p class="date">December 4, 2017 at 3:12 pm</p>
-                  <p class="comment">Never say goodbye till the end comes!</p>
+                  <h5><a href="#">{{ comment.name }}</a></h5>
+                  <p class="date">{{ comment.created_date|date:"d M Y" }}</p>
+                  <p class="comment">{{ comment.message }}</p>
                 </div>
-              </div>
-              <div class="reply-btn">
-                <a href="" class="btn-reply text-uppercase">reply</a>
               </div>
             </div>
           </div>
-          <div class="comment-list left-padding">
-            <div class="single-comment justify-content-between d-flex">
-              <div class="user justify-content-between d-flex">
-                <div class="thumb">
-                  <img src="{% static 'img/blog/c2.jpg' %}" alt="" />
-                </div>
-                <div class="desc">
-                  <h5><a href="#">Elsie Cunningham</a></h5>
-                  <p class="date">December 4, 2017 at 3:12 pm</p>
-                  <p class="comment">Never say goodbye till the end comes!</p>
-                </div>
-              </div>
-              <div class="reply-btn">
-                <a href="" class="btn-reply text-uppercase">reply</a>
-              </div>
+          {% empty %}
+          <div class="text-center py-5">
+            <div class="empty-comments-container">
+              <i class="fa fa-comments-o fa-4x mb-3" aria-hidden="true"></i>
+              <h4 class="empty-comments-text">هنوز نظری ثبت نشده است</h4>
+              <p class="text-muted">اولین نفری باشید که نظر می‌دهید!</p>
             </div>
           </div>
-          <div class="comment-list left-padding">
-            <div class="single-comment justify-content-between d-flex">
-              <div class="user justify-content-between d-flex">
-                <div class="thumb">
-                  <img src="{% static 'img/blog/c3.jpg' %}" alt="" />
-                </div>
-                <div class="desc">
-                  <h5><a href="#">Annie Stephens</a></h5>
-                  <p class="date">December 4, 2017 at 3:12 pm</p>
-                  <p class="comment">Never say goodbye till the end comes!</p>
-                </div>
-              </div>
-              <div class="reply-btn">
-                <a href="" class="btn-reply text-uppercase">reply</a>
-              </div>
-            </div>
-          </div>
-          <div class="comment-list">
-            <div class="single-comment justify-content-between d-flex">
-              <div class="user justify-content-between d-flex">
-                <div class="thumb">
-                  <img src="{% static 'img/blog/c4.jpg' %}" alt="" />
-                </div>
-                <div class="desc">
-                  <h5><a href="#">Maria Luna</a></h5>
-                  <p class="date">December 4, 2017 at 3:12 pm</p>
-                  <p class="comment">Never say goodbye till the end comes!</p>
-                </div>
-              </div>
-              <div class="reply-btn">
-                <a href="" class="btn-reply text-uppercase">reply</a>
-              </div>
-            </div>
-          </div>
-          <div class="comment-list">
-            <div class="single-comment justify-content-between d-flex">
-              <div class="user justify-content-between d-flex">
-                <div class="thumb">
-                  <img src="{% static 'img/blog/c5.jpg' %}" alt="" />
-                </div>
-                <div class="desc">
-                  <h5><a href="#">Ina Hayes</a></h5>
-                  <p class="date">December 4, 2017 at 3:12 pm</p>
-                  <p class="comment">Never say goodbye till the end comes!</p>
-                </div>
-              </div>
-              <div class="reply-btn">
-                <a href="" class="btn-reply text-uppercase">reply</a>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
+        
         <div class="comment-form">
           <h4>Leave a Comment</h4>
-          <form>
+          <form action="{% url 'blog:single' post.id %}" method="post">
+            {% csrf_token %}
             <div class="form-group form-inline">
               <div class="form-group col-lg-6 col-md-12 name">
                 <input
                   type="text"
                   class="form-control"
                   id="name"
+                  name="name"
                   placeholder="Enter Name"
                   onfocus="this.placeholder = ''"
-                  onblur="this.placeholder = 'Enter Name'" />
+                  onblur="this.placeholder = 'Enter Name'" 
+                  required/>
               </div>
               <div class="form-group col-lg-6 col-md-12 email">
                 <input
                   type="email"
                   class="form-control"
                   id="email"
+                  name="email"
                   placeholder="Enter email address"
                   onfocus="this.placeholder = ''"
-                  onblur="this.placeholder = 'Enter email address'" />
+                  onblur="this.placeholder = 'Enter email address'" 
+                  required/>
               </div>
             </div>
             <div class="form-group">
@@ -239,23 +161,101 @@
                 type="text"
                 class="form-control"
                 id="subject"
+                name="subject"
                 placeholder="Subject"
                 onfocus="this.placeholder = ''"
-                onblur="this.placeholder = 'Subject'" />
+                onblur="this.placeholder = 'Subject'" 
+                required/>
             </div>
             <div class="form-group">
               <textarea
                 class="form-control mb-10"
                 rows="5"
                 name="message"
-                placeholder="Messege"
+                placeholder="Message"
                 onfocus="this.placeholder = ''"
-                onblur="this.placeholder = 'Messege'"
-                required=""></textarea>
+                onblur="this.placeholder = 'Message'"
+                required></textarea>
             </div>
-            <a href="#" class="primary-btn text-uppercase">Post Comment</a>
+            <button type="submit" class="primary-btn text-uppercase">Post Comment</button>
           </form>
         </div>
+        
+        {% if messages %}
+          <div class="messages-container">
+            {% for message in messages %}
+              <div class="alert alert-{{ message.tags }} fade-in" style="
+                font-size: 1.2rem;
+                color: #fff;
+                background-color: {% if message.tags == 'success' %}#27ae60{% else %}#e74c3c{% endif %};
+                font-family: 'Vazir', 'IRANSans', sans-serif;
+                padding: 20px 25px;
+                border-radius: 10px;
+                box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+                margin: 20px 0;
+                text-align: center;
+                border-right: 6px solid {% if message.tags == 'success' %}#219653{% else %}#c0392b{% endif %};
+                position: relative;
+                overflow: hidden;">
+                <i class="fa {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}" style="margin-left: 10px;"></i>
+                {{ message }}
+                
+                <!-- نوار پیشرفت در پایین پیام -->
+                <div class="progress-bar" style="
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  height: 4px;
+                  width: 100%;
+                  background-color: rgba(255, 255, 255, 0.3);
+                  ">
+                  <div class="progress" style="
+                    height: 100%;
+                    width: 100%;
+                    background-color: rgba(255, 255, 255, 0.7);
+                    animation: slideOut 5s linear forwards;
+                  "></div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+
+          <style>
+            @keyframes slideOut {
+              from { width: 100%; }
+              to { width: 0%; }
+            }
+            
+            .fade-in {
+              opacity: 0;
+              animation: fadeIn 0.5s ease forwards;
+            }
+            
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(-10px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+          </style>
+
+          <script>
+            // حذف پیام‌ها بعد از 5 ثانیه
+            document.addEventListener('DOMContentLoaded', function() {
+              setTimeout(function() {
+                const messages = document.querySelectorAll('.alert');
+                messages.forEach(function(message) {
+                  message.style.opacity = '0';
+                  message.style.transform = 'translateY(-10px)';
+                  message.style.transition = 'all 0.5s ease';
+                  
+                  setTimeout(function() {
+                    message.remove();
+                  }, 500);
+                });
+              }, 5000);
+            });
+          </script>
+        {% endif %}
+        
       </div>
       <div class="col-lg-4 sidebar-widgets">
         <div class="widget-wrap">
