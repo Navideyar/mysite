@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'taggit',
     'captcha',
     'django_summernote',
+    'accounts',
     
 ]
 
@@ -101,6 +102,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
+
+# تنظیمات CSRF
+CSRF_COOKIE_SECURE = False  # در محیط توسعه False باشد
+CSRF_COOKIE_HTTPONLY = False  # برای دسترسی JavaScript به توکن
+CSRF_USE_SESSIONS = False  # استفاده از کوکی برای توکن CSRF
+CSRF_COOKIE_SAMESITE = 'Lax'  # تنظیم samesite برای کوکی
 
 ROOT_URLCONF = 'mysite.urls'
 
@@ -188,4 +195,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+
+# تنظیمات مسیرهای ورود و خروج
+# برای کاربران عادی از مسیر سفارشی استفاده می‌کنیم
+# برای مدیران، جنگو به طور خودکار از مسیر admin/login استفاده می‌کند
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 

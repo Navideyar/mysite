@@ -38,11 +38,15 @@
             <div class="col-lg-6 col-sm-6 col-6 header-top-left">
               <ul>
                 <li>
-                  <a href="#">Visit Us</a>
+                  <a href="#">{% if request.user.is_authenticated %}
+                    <li>logged in as {{ request.user.username }}</li>
+                    <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+					{% else %}
+				  <a href="{% url 'accounts:login' %}">Login</a>
+				  <a href="{% url 'accounts:signup' %}">signup</a>
+                  {% endif %}
                 </li>
-                <li>
-                  <a href="#">Buy Tickets</a>
-                </li>
+                
               </ul>
             </div>
             <div class="col-lg-6 col-sm-6 col-6 header-top-right">

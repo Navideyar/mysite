@@ -1,0 +1,159 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ورود به حساب کاربری</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      font-family: 'Vazir', Tahoma, Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 20px 0;
+    }
+    .card {
+      transition: all 0.3s ease;
+      border: none;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+    .btn-primary {
+      transition: all 0.3s ease;
+      background-color: #4361ee;
+      border-color: #4361ee;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      background-color: #3a56d4;
+      border-color: #3a56d4;
+    }
+    .form-control:focus {
+      border-color: #4361ee;
+      box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+    }
+    .card-header {
+      background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+    }
+    a {
+      color: #4361ee;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #3a56d4;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% else %}alert-info{% endif %} alert-dismissible fade show mb-4" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="بستن"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <div class="card shadow-lg rounded-3 border-0">
+        <div class="card-header bg-primary text-white text-center p-3" style="border-radius: 0.5rem 0.5rem 0 0;">
+          <h3 class="mb-0">ورود به حساب کاربری</h3>
+        </div>
+        <div class="card-body p-4">
+          <form method="post" action="{% url 'accounts:login' %}" novalidate>
+            {% csrf_token %}
+            
+            {% if error %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ error }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="بستن"></button>
+            </div>
+            {% endif %}
+            
+            {% if form.non_field_errors %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {% for error in form.non_field_errors %}
+                {{ error }}
+              {% endfor %}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="بستن"></button>
+            </div>
+            {% endif %}
+            
+            <div class="form-group mb-4">
+              <label for="username" class="form-label fw-bold">نام کاربری</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="bi bi-person-fill"></i></span>
+                <input type="text" class="form-control py-2" id="username" name="username" placeholder="نام کاربری خود را وارد کنید" required value="{{ request.POST.username }}">
+              </div>
+              {% if form.username.errors %}
+              <div class="text-danger mt-1">
+                {{ form.username.errors }}
+              </div>
+              {% endif %}
+            </div>
+            
+            <div class="form-group mb-4">
+              <label for="password" class="form-label fw-bold">رمز عبور</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
+                <input type="password" class="form-control py-2" id="password" name="password" placeholder="رمز عبور خود را وارد کنید" required>
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                  <i class="bi bi-eye-slash-fill"></i>
+                </button>
+              </div>
+              {% if form.password.errors %}
+              <div class="text-danger mt-1">
+                {{ form.password.errors }}
+              </div>
+              {% endif %}
+            </div>
+            
+            <div class="form-group form-check mb-4">
+              <input type="checkbox" class="form-check-input" id="remember-me" name="remember-me">
+              <label class="form-check-label" for="remember-me">من را به خاطر بسپار</label>
+            </div>
+            
+            <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">ورود</button>
+            
+            <div class="mt-4 text-center">
+              <p class="mb-0">حساب کاربری ندارید؟ <a href="{% url 'accounts:signup' %}" class="text-primary fw-bold text-decoration-none">ثبت نام کنید</a></p>
+              <hr class="my-4">
+              <p class="small text-muted">اگر مدیر سایت هستید، لطفاً از <a href="/admin/" class="text-primary">صفحه ورود ادمین</a> استفاده کنید.</p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // نمایش/مخفی کردن رمز عبور
+  document.getElementById('togglePassword').addEventListener('click', function() {
+    const passwordField = document.getElementById('password');
+    const icon = this.querySelector('i');
+    
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      icon.classList.remove('bi-eye-slash-fill');
+      icon.classList.add('bi-eye-fill');
+    } else {
+      passwordField.type = 'password';
+      icon.classList.remove('bi-eye-fill');
+      icon.classList.add('bi-eye-slash-fill');
+    }
+  });
+</script>
+</body>
+</html>

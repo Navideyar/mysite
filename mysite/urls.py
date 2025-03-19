@@ -32,6 +32,7 @@ sitemaps = {
 }
 
 urlpatterns = [
+    # استفاده از پنل ادمین اصلی جنگو با کپچا
     path('admin/', admin.site.urls),
     path('', include('website.urls')),
     path('blog/', include('blog.urls')),
@@ -40,9 +41,8 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
     path('captcha/', include('captcha.urls')),
+    path('accounts/', include('accounts.urls')),
 ]
-
-
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

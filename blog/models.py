@@ -17,10 +17,12 @@ class Post(models.Model):
     category = models.ManyToManyField(Category)
     counted_views = models.IntegerField(default=0)
     status = models.BooleanField(default=False)
+    login_required = models.BooleanField(default=False)
     published_date = models.DateField(null=True)
     created_date = models.DateField(auto_now_add=True)
     updated_date = models.DateField(auto_now=True)
     tags = TaggableManager()
+    
     class Meta:
         ordering = ["-created_date"]
         

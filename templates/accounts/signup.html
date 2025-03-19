@@ -1,0 +1,166 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ثبت نام</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
+  <style>
+    body {
+      font-family: 'Vazir', Tahoma, Arial, sans-serif;
+      background-color: #f8f9fa;
+      padding: 20px 0;
+    }
+    .card {
+      transition: all 0.3s ease;
+      border: none;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+    .btn-success {
+      transition: all 0.3s ease;
+      background-color: #38b000;
+      border-color: #38b000;
+    }
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(56, 176, 0, 0.4);
+      background-color: #2d9200;
+      border-color: #2d9200;
+    }
+    .form-control:focus {
+      border-color: #38b000;
+      box-shadow: 0 0 0 0.2rem rgba(56, 176, 0, 0.25);
+    }
+    .card-header {
+      background: linear-gradient(135deg, #38b000 0%, #2d9200 100%);
+    }
+    a {
+      color: #38b000;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #2d9200;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert {% if message.tags == 'success' %}alert-success{% elif message.tags == 'error' %}alert-danger{% else %}alert-info{% endif %} alert-dismissible fade show mb-4" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="بستن"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+      
+      <div class="card shadow-lg rounded-3 border-0">
+        <div class="card-header bg-success text-white text-center p-3" style="border-radius: 0.5rem 0.5rem 0 0;">
+          <h3 class="mb-0">ثبت نام</h3>
+        </div>
+        <div class="card-body p-4">
+          {% if error %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ error }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="بستن"></button>
+          </div>
+          {% endif %}
+          
+          <form method="post" action="{% url 'accounts:signup' %}" novalidate>
+            {% csrf_token %}
+            <div class="mb-4">
+              <label for="username" class="form-label fw-bold">نام کاربری</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="bi bi-person-plus-fill"></i></span>
+                <input type="text" name="username" class="form-control py-2" id="username" placeholder="یک نام کاربری انتخاب کنید" required value="{{ request.POST.username }}">
+              </div>
+              <div class="form-text text-muted">نام کاربری باید شامل حروف، اعداد و علائم @ . + - _ باشد</div>
+            </div>
+            <div class="mb-4">
+              <label for="email" class="form-label fw-bold">ایمیل</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="bi bi-envelope-fill"></i></span>
+                <input type="email" name="email" class="form-control py-2" id="email" placeholder="آدرس ایمیل خود را وارد کنید" required value="{{ request.POST.email }}">
+              </div>
+            </div>
+            <div class="mb-4">
+              <label for="password1" class="form-label fw-bold">رمز عبور</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="bi bi-lock-fill"></i></span>
+                <input type="password" name="password1" class="form-control py-2" id="password1" placeholder="یک رمز عبور قوی انتخاب کنید" required>
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword1">
+                  <i class="bi bi-eye-slash-fill"></i>
+                </button>
+              </div>
+              <div class="form-text text-muted">رمز عبور باید حداقل ۸ کاراکتر باشد و نباید خیلی ساده باشد</div>
+            </div>
+            <div class="mb-4">
+              <label for="password2" class="form-label fw-bold">تکرار رمز عبور</label>
+              <div class="input-group">
+                <span class="input-group-text bg-light"><i class="bi bi-key-fill"></i></span>
+                <input type="password" name="password2" class="form-control py-2" id="password2" placeholder="رمز عبور را مجدداً وارد کنید" required>
+                <button class="btn btn-outline-secondary" type="button" id="togglePassword2">
+                  <i class="bi bi-eye-slash-fill"></i>
+                </button>
+              </div>
+            </div>
+            <div class="d-grid gap-2 mt-4">
+              <button type="submit" class="btn btn-success py-2 fw-bold">ثبت نام</button>
+            </div>
+          </form>
+          
+          <div class="mt-4 text-center">
+            <p class="mb-0">قبلاً ثبت نام کرده‌اید؟ <a href="{% url 'accounts:login' %}" class="text-success fw-bold text-decoration-none">وارد شوید</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // نمایش/مخفی کردن رمز عبور
+  document.getElementById('togglePassword1').addEventListener('click', function() {
+    const passwordField = document.getElementById('password1');
+    const icon = this.querySelector('i');
+    
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      icon.classList.remove('bi-eye-slash-fill');
+      icon.classList.add('bi-eye-fill');
+    } else {
+      passwordField.type = 'password';
+      icon.classList.remove('bi-eye-fill');
+      icon.classList.add('bi-eye-slash-fill');
+    }
+  });
+  
+  document.getElementById('togglePassword2').addEventListener('click', function() {
+    const passwordField = document.getElementById('password2');
+    const icon = this.querySelector('i');
+    
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      icon.classList.remove('bi-eye-slash-fill');
+      icon.classList.add('bi-eye-fill');
+    } else {
+      passwordField.type = 'password';
+      icon.classList.remove('bi-eye-fill');
+      icon.classList.add('bi-eye-slash-fill');
+    }
+  });
+</script>
+</body>
+</html>

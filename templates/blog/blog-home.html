@@ -146,8 +146,8 @@
             </div>
             <a class="posts-title" href="{% url 'blog:single' post.id %}"
               ><h3>{{post.title}}</h3></a>
-            <p class="excert">{{ post.content|truncatechars:150 }}</p>
-            <a href="blog-single.html" class="primary-btn">View More</a>
+            <p class="excert">{{ post.content|striptags|truncatechars:250 }}</p>
+            <a href="{% url 'blog:single' post.id %}" class="primary-btn">View More</a>
           </div>
         </div>
         {% endfor %}

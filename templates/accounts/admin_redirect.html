@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5 mb-5 text-center">
+    <h2>در حال انتقال به پنل مدیریت...</h2>
+    <p>لطفاً صبر کنید، شما به پنل مدیریت منتقل خواهید شد.</p>
+    <div class="spinner-border text-primary mt-3" role="status">
+        <span class="visually-hidden">در حال بارگذاری...</span>
+    </div>
+</div>
+
+<script>
+    // انتقال به صفحه ادمین جنگو
+    window.location.href = '/admin/';
+</script>
+{% endblock %} 

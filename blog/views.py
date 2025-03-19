@@ -1,9 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404 , redirect
 from blog.models import Post, Category , Comment 
 from django.db.models import Q
 from django.core.paginator import Paginator , EmptyPage , PageNotAnInteger
 from django.contrib import messages
 from .forms import CommentForm
+from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def blog_view(request, cat_name=None, author_username=None, tag_name=None):
@@ -15,14 +17,13 @@ def blog_view(request, cat_name=None, author_username=None, tag_name=None):
     if tag_name:
         posts = posts.filter(tags__name=tag_name)
     
-    posts = Paginator(posts, 2)
+    posts = Paginator(posts, 4)
     try:
         page_number = request.GET.get("page")
         posts = posts.get_page(page_number)
     except:
         posts = posts.get_page(1)
     
-
     context = {"posts": posts}
     return render(request, "blog/blog-home.html", context)
 
@@ -34,7 +35,7 @@ def blog_single(request, pid):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.post = post  # اینجا post را به comment اضافه می‌کنیم
+            comment.post = post
             comment.save()
             messages.add_message(request, messages.SUCCESS, "نظر شما با موفقیت ثبت شد")
         else:
@@ -46,13 +47,23 @@ def blog_single(request, pid):
     post.counted_views += 1
     post.save()
     
-    # دریافت کامنت‌های مربوط به این پست از دیتابیس
-    comments = Comment.objects.filter(post=post.id, approved=True)
-    form = CommentForm()
-    context = {"post": post, "comments": comments, "form": form}
-    
-    return render(request, "blog/blog-single.html", context)
-
+    if not post.login_required:
+        comments = Comment.objects.filter(post=post.id, approved=True)
+        form = CommentForm()
+        context = {"post": post, "comments": comments, "form": form}
+        return render(request, "blog/blog-single.html", context)
+    else:
+        if not request.user.is_authenticated:
+            next_url = request.path
+            login_url = reverse('accounts:login')
+            return redirect(f"{login_url}?next={next_url}")
+        else:
+            comments = Comment.objects.filter(post=post.id, approved=True)
+            form = CommentForm()
+            context = {"post": post, "comments": comments, "form": form}
+            return render(request, "blog/blog-single.html", context)
+        
+   
 
 def test(request):
     return render(request, "test.html")
