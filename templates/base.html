@@ -29,6 +29,429 @@
     <link rel="stylesheet" href="{% static 'css/animate.min.css' %}" />
     <link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <style>
+      :root {
+        --primary-color: #2ecc71;
+        --secondary-color: #3498db;
+        --accent-color: #1abc9c;
+        --text-color: #2c3e50;
+        --light-bg: #ecf0f1;
+      }
+      
+      .header-top {
+        background: var(--primary-color);
+      }
+      
+      .primary-btn {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+      
+      .primary-btn:hover {
+        background: var(--secondary-color);
+        border-color: var(--secondary-color);
+      }
+      
+      .nav-menu li a:hover {
+        color: var(--primary-color);
+      }
+      
+      .footer-area {
+        background: var(--text-color);
+      }
+      
+      .footer-social a:hover {
+        background: var(--primary-color);
+      }
+      
+      .single-footer-widget h6 {
+        color: var(--primary-color);
+      }
+      
+      .btn-bb {
+        background: var(--primary-color);
+      }
+      
+      .btn-bb:hover {
+        background: var(--secondary-color);
+      }
+      
+      /* Sidebar Styles */
+      .search-widget button {
+        background: var(--primary-color) !important;
+      }
+      
+      .search-widget button:hover {
+        background: var(--secondary-color) !important;
+      }
+      
+      .category-title, .popular-title, .tagcloud-title, .newsletter-title {
+        background: var(--primary-color) !important;
+        background: linear-gradient(to right, var(--primary-color), var(--secondary-color)) !important;
+      }
+      
+      .cat-list a:hover p {
+        color: var(--primary-color) !important;
+      }
+      
+      .tag-cloud-widget ul li a {
+        background: var(--light-bg) !important;
+        color: var(--text-color) !important;
+      }
+      
+      .tag-cloud-widget ul li a:hover {
+        background: var(--primary-color) !important;
+        color: white !important;
+      }
+      
+      .post-category-widget, .popular-post-widget, .tag-cloud-widget, .newsletter-widget {
+        border-top: 3px solid var(--primary-color) !important;
+      }
+      
+      .single-sidebar-widget {
+        border-bottom: 1px solid var(--light-bg) !important;
+      }
+      
+      .user-info-widget h4 {
+        color: var(--text-color) !important;
+      }
+      
+      .user-info-widget .social-links li a {
+        color: var(--primary-color) !important;
+      }
+      
+      .user-info-widget .social-links li a:hover {
+        background: var(--primary-color) !important;
+        color: white !important;
+      }
+      
+      .pagination .page-item.active .page-link {
+        background-color: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+      }
+      
+      .pagination .page-link {
+        color: var(--text-color) !important;
+      }
+      
+      .pagination .page-link:hover {
+        background-color: var(--secondary-color) !important;
+        color: white !important;
+      }
+      
+      .genric-btn.primary {
+        background: var(--primary-color) !important;
+      }
+      
+      .genric-btn.primary:hover {
+        background: var(--secondary-color) !important;
+      }
+      
+      /* Change empty comments container colors */
+      .empty-comments-container .icon-wrapper {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
+        box-shadow: 0 10px 20px rgba(46, 204, 113, 0.25) !important;
+      }
+      
+      .decorative-line {
+        background: linear-gradient(90deg, var(--primary-color), var(--secondary-color)) !important;
+      }
+      
+      .decorative-circles div {
+        border-color: var(--primary-color) !important;
+      }
+      
+      /* Additional elements */
+      .blog-pagination .page-item.active a {
+        background: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+      }
+      
+      .blog-pagination a:hover {
+        background: var(--secondary-color) !important;
+        color: white !important;
+      }
+      
+      .widget-wrap a:hover {
+        color: var(--primary-color) !important;
+      }
+      
+      /* Button styles in comments */
+      .comment-form button {
+        background: var(--primary-color) !important;
+        border-color: var(--primary-color) !important;
+      }
+      
+      .comment-form button:hover {
+        background: var(--secondary-color) !important;
+        border-color: var(--secondary-color) !important;
+      }
+
+      /* حالت شب - بهبود یافته */
+      body.dark-mode {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+      }
+
+      body.dark-mode .top-category-widget-area {
+        background-color: #2d2d2d !important;
+      }
+
+      body.dark-mode h1, 
+      body.dark-mode h2, 
+      body.dark-mode h3, 
+      body.dark-mode h4, 
+      body.dark-mode h5, 
+      body.dark-mode h6, 
+      body.dark-mode p, 
+      body.dark-mode span,
+      body.dark-mode li,
+      body.dark-mode .text-heading,
+      body.dark-mode .title-text,
+      body.dark-mode .section-title h1,
+      body.dark-mode .section-title p {
+        color: #e0e0e0 !important;
+      }
+
+      body.dark-mode .banner-content h1,
+      body.dark-mode .banner-content h4,
+      body.dark-mode .banner-content p,
+      body.dark-mode .single-feature h4,
+      body.dark-mode .single-destination h4,
+      body.dark-mode .single-recent-blog h4,
+      body.dark-mode .single-price .top-part h4,
+      body.dark-mode .counter-number h1,
+      body.dark-mode .naming h3 {
+        color: #e0e0e0 !important;
+      }
+
+      body.dark-mode .row .text-white {
+        color: #e0e0e0 !important;
+      }
+
+      body.dark-mode .primary-btn,
+      body.dark-mode .genric-btn.primary,
+      body.dark-mode .genric-btn.success,
+      body.dark-mode .genric-btn.info {
+        background: var(--primary-color) !important;
+        color: #fff !important;
+      }
+
+      body.dark-mode .primary-btn:hover,
+      body.dark-mode .genric-btn.primary:hover,
+      body.dark-mode .genric-btn.success:hover,
+      body.dark-mode .genric-btn.info:hover {
+        background: var(--secondary-color) !important;
+      }
+
+      body.dark-mode .single-destination,
+      body.dark-mode .single-recent-blog,
+      body.dark-mode .single-price,
+      body.dark-mode .single-feature {
+        background: #2d2d2d;
+        border-color: #444;
+      }
+
+      body.dark-mode .single-price,
+      body.dark-mode .single-service,
+      body.dark-mode .about-content,
+      body.dark-mode .contact-page-area .form-area {
+        background-color: #2d2d2d;
+      }
+
+      body.dark-mode .single-price .bottom-part,
+      body.dark-mode .single-service .thumb {
+        background-color: #222;
+      }
+      
+      body.dark-mode .counter-row {
+        background-color: rgba(45, 45, 45, 0.9);
+      }
+
+      body.dark-mode .counter-row h1,
+      body.dark-mode .counter-row p {
+        color: #e0e0e0 !important;
+      }
+
+      body.dark-mode .footer-text,
+      body.dark-mode .footer-area p,
+      body.dark-mode .single-footer-widget p,
+      body.dark-mode .single-footer-widget li {
+        color: #aaa !important;
+      }
+
+      body.dark-mode .header-top {
+        background: #272727;
+      }
+      
+      body.dark-mode .header-top a,
+      body.dark-mode .header-social a {
+        color: #e0e0e0;
+      }
+      
+      body.dark-mode .main-menu {
+        background-color: #2d2d2d;
+      }
+      
+      body.dark-mode nav#nav-menu-container {
+        background-color: #2d2d2d;
+      }
+      
+      body.dark-mode #logo img {
+        filter: brightness(0.9);
+      }
+      
+      body.dark-mode a:hover {
+        color: var(--primary-color);
+      }
+
+      body.dark-mode .card,
+      body.dark-mode .single-post, 
+      body.dark-mode .widget-wrap,
+      body.dark-mode .nav-menu,
+      body.dark-mode .comment-form, 
+      body.dark-mode .form-control,
+      body.dark-mode .pagination,
+      body.dark-mode .comment-list,
+      body.dark-mode .single-sidebar-widget {
+        background-color: #2d2d2d;
+        color: #e0e0e0;
+        border-color: #444;
+      }
+
+      body.dark-mode .main-menu,
+      body.dark-mode .footer-area,
+      body.dark-mode .widget-wrap,
+      body.dark-mode .post-content-area,
+      body.dark-mode .blog-area,
+      body.dark-mode .single-blog,
+      body.dark-mode .single-widget,
+      body.dark-mode .generic-banner,
+      body.dark-mode .banner-area {
+        background-color: #2d2d2d;
+      }
+      
+      body.dark-mode .section-gap,
+      body.dark-mode .home-about-area,
+      body.dark-mode .services-area,
+      body.dark-mode .facts-area,
+      body.dark-mode .feature-area,
+      body.dark-mode .price-area,
+      body.dark-mode .blog-area {
+        background-color: #1a1a1a;
+      }
+
+      body.dark-mode .form-control {
+        background-color: #3d3d3d;
+        color: #e0e0e0;
+        border-color: #555;
+      }
+
+      body.dark-mode a {
+        color: #6ecadc;
+      }
+
+      body.dark-mode .nav-menu a {
+        color: #e0e0e0;
+      }
+
+      body.dark-mode .post-content h3 a,
+      body.dark-mode .blog-info .link-preview,
+      body.dark-mode .single-post h1,
+      body.dark-mode .single-post h2,
+      body.dark-mode .single-post h3,
+      body.dark-mode .single-post h4,
+      body.dark-mode .single-post h5,
+      body.dark-mode .single-post h6,
+      body.dark-mode .comment-list h5,
+      body.dark-mode .single-sidebar-widget h4,
+      body.dark-mode .widget-wrap h4 {
+        color: #e0e0e0;
+      }
+      
+      body.dark-mode .single-sidebar-widget,
+      body.dark-mode .post-list {
+        border-color: #444;
+      }
+      
+      body.dark-mode .single-post-area {
+        background: #1a1a1a;
+      }
+      
+      body.dark-mode .blog-posts-area {
+        background: #1a1a1a;
+      }
+      
+      body.dark-mode .feature-area {
+        background: #1a1a1a;
+      }
+      
+      body.dark-mode table,
+      body.dark-mode th,
+      body.dark-mode td {
+        border-color: #444;
+        color: #e0e0e0;
+      }
+      
+      body.dark-mode input,
+      body.dark-mode textarea {
+        background-color: #3d3d3d;
+        color: #e0e0e0;
+        border-color: #555;
+      }
+      
+      body.dark-mode input::placeholder,
+      body.dark-mode textarea::placeholder {
+        color: #999;
+      }
+
+      /* دکمه تغییر حالت */
+      #theme-toggle-btn {
+        background: transparent;
+        border: 1px solid #fff;
+        color: #fff;
+        transition: all 0.3s ease;
+        padding: 5px 10px;
+        margin-right: 10px;
+        border-radius: 4px;
+        font-size: 13px;
+      }
+
+      #theme-toggle-btn:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      body.dark-mode #theme-toggle-btn i.fa-moon-o {
+        display: none;
+      }
+
+      body.dark-mode #theme-toggle-btn i.fa-sun-o {
+        display: inline;
+      }
+
+      #theme-toggle-btn i.fa-sun-o {
+        display: none;
+      }
+      
+      #theme-toggle-btn i.fa-moon-o {
+        display: inline;
+      }
+      
+      .header-top-left {
+        display: flex;
+        align-items: center;
+      }
+      
+      .header-top-left ul {
+        display: flex;
+        margin-bottom: 0;
+        align-items: center;
+      }
+      
+      .header-top-left ul li {
+        margin-right: 15px;
+      }
+    </style>
   </head>
   <body>
     <header id="header">
@@ -37,6 +460,11 @@
           <div class="row align-items-center">
             <div class="col-lg-6 col-sm-6 col-6 header-top-left">
               <ul>
+                <li>
+                  <button id="theme-toggle-btn" class="btn btn-sm">
+                    <i class="fa fa-moon-o"></i> <span>حالت شب</span>
+                  </button>
+                </li>
                 <li>
                   <a href="#">{% if request.user.is_authenticated %}
                     <li>logged in as {{ request.user.username }}</li>
@@ -192,5 +620,50 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<script src="{% static 'js/mail-script.js' %}"></script>	
 			<script src="{% static 'js/main.js' %}"></script>
 			<script src="{% static 'js/newsletter.js' %}"></script>
+			<script>
+				// تنظیم حالت پیش‌فرض بر اساس تنظیمات ذخیره شده
+				document.addEventListener('DOMContentLoaded', function() {
+					// بررسی تنظیمات حالت ذخیره شده
+					const darkMode = localStorage.getItem('darkMode');
+					
+					if (darkMode === 'enabled') {
+						document.body.classList.add('dark-mode');
+						updateToggleButton(true);
+					}
+					
+					// اضافه کردن رویداد کلیک به دکمه تغییر حالت
+					const themeToggle = document.getElementById('theme-toggle-btn');
+					if (themeToggle) {
+						themeToggle.addEventListener('click', function() {
+							if (document.body.classList.contains('dark-mode')) {
+								// تغییر به حالت روز
+								document.body.classList.remove('dark-mode');
+								localStorage.setItem('darkMode', 'disabled');
+								updateToggleButton(false);
+							} else {
+								// تغییر به حالت شب
+								document.body.classList.add('dark-mode');
+								localStorage.setItem('darkMode', 'enabled');
+								updateToggleButton(true);
+							}
+						});
+					}
+				});
+				
+				// بروزرسانی متن و آیکون دکمه
+				function updateToggleButton(isDarkMode) {
+					const themeToggle = document.getElementById('theme-toggle-btn');
+					if (themeToggle) {
+						const buttonText = themeToggle.querySelector('span');
+						if (isDarkMode) {
+							buttonText.textContent = 'حالت روز';
+							themeToggle.innerHTML = '<i class="fa fa-sun-o"></i> <span>حالت روز</span>';
+						} else {
+							buttonText.textContent = 'حالت شب';
+							themeToggle.innerHTML = '<i class="fa fa-moon-o"></i> <span>حالت شب</span>';
+						}
+					}
+				}
+			</script>
 		</body>
 	</html>

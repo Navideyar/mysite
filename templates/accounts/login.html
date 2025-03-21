@@ -10,43 +10,59 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/font-face.css" rel="stylesheet" type="text/css" />
   <style>
+    :root {
+      --primary-color: #2ecc71;
+      --secondary-color: #3498db;
+      --accent-color: #1abc9c;
+      --text-color: #2c3e50;
+      --light-bg: #ecf0f1;
+    }
+    
     body {
       font-family: 'Vazir', Tahoma, Arial, sans-serif;
-      background-color: #f8f9fa;
+      background-color: var(--light-bg);
       padding: 20px 0;
     }
+    
     .card {
       transition: all 0.3s ease;
       border: none;
     }
+    
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
     }
+    
     .btn-primary {
       transition: all 0.3s ease;
-      background-color: #4361ee;
-      border-color: #4361ee;
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
     }
+    
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
-      background-color: #3a56d4;
-      border-color: #3a56d4;
+      box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
     }
+    
     .form-control:focus {
-      border-color: #4361ee;
-      box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.25);
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(46, 204, 113, 0.25);
     }
+    
     .card-header {
-      background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     }
+    
     a {
-      color: #4361ee;
+      color: var(--primary-color);
       text-decoration: none;
     }
+    
     a:hover {
-      color: #3a56d4;
+      color: var(--secondary-color);
       text-decoration: underline;
     }
   </style>
